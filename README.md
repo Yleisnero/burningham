@@ -1,5 +1,5 @@
 # burningham
-Solve some riddles in the wonderfool city Burningham (German: Brennender Schinken).
+Solve some riddles in the mysterious city Burningham (German: Brennender Schinken).
 
 How to play:
   -Download/Copy the .py file
