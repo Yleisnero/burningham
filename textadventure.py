@@ -42,32 +42,32 @@ worldItems = {
         GROUNDDESC: 'A piece of paper lays on the ground',
         SHORTDESC: 'piece of paper',
         LONGDESC: 'The piece of paper says: "Solve the first task to prove you are strong enough to enter this'
-                  ' mysterious world!"'
-                  '| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |'
-                  '-------------------------------------'
-                  ' 0 |NUL|DLE|SPC| 0 | @ | P | ` | p |'
-                  ' 1 |SOH|DC1| ! | 1 | A | Q | a | q |'
-                  ' 2 |STX|DC2| " | 2 | B | R | b | r |'
-                  ' 3 |ETX|DC3| # | 3 | C | S | c | s |'
-                  ' 4 |EQT|DC4| $ | 4 | D | T | d | t |'
-                  ' 5 |ENQ|NAK| % | 5 | E | U | e | u |'
-                  ' 6 |ACK|SQN| & | 6 | F | V | f | v |'
-                  ' 7 |BEL|BTB| \' | 7 | G | W | g | w |'
-                  ' 8 |BS |CAN| ( | 8 | H | X | h | x |'
-                  ' 9 |HT |EM | ) | 9 | I | Y | i | y |'
-                  ' A |LF |SUB| * | : | J | Z | j | z |'
-                  ' B |VT |ESC| + | ; | K | [ | k | { |'
-                  ' C |FF |FS | , | < | L | \ | l | | |'
-                  ' D |CR |GS | - | = | M | ] | m | } |'
-                  ' E |SO |RS | . | > | N | ^ | n | ~ |'
-                  ' F |SI |US | / | ? | O | _ | o |del|',
+                  ' mysterious world!"\n'
+                  "   | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n"
+                  "-------------------------------------\n"
+                  " 0 |NUL|DLE|SPC| 0 | @ | P | ` | p |\n"
+                  " 1 |SOH|DC1| ! | 1 | A | Q | a | q |\n"
+                  " 2 |STX|DC2| \" | 2 | B | R | b | r |\n"
+                  " 3 |ETX|DC3| # | 3 | C | S | c | s |\n"
+                  " 4 |EQT|DC4| $ | 4 | D | T | d | t |\n"
+                  " 5 |ENQ|NAK| % | 5 | E | U | e | u |\n"
+                  " 6 |ACK|SQN| & | 6 | F | V | f | v |\n"
+                  " 7 |BEL|BTB| ' | 7 | G | W | g | w |\n"
+                  " 8 |BS |CAN| ( | 8 | H | X | h | x |\n"
+                  " 9 |HT |EM | ) | 9 | I | Y | i | y |\n"
+                  " A |LF |SUB| * | : | J | Z | j | z |\n"
+                  " B |VT |ESC| + | ; | K | [ | k | { |\n"
+                  " C |FF |FS | , | < | L | \ | l | | |\n"
+                  " D |CR |GS | - | = | M | ] | m | } |\n"
+                  " E |SO |RS | . | > | N | ^ | n | ~ |\n"
+                  " F |SI |US | / | ? | O | _ | o |del|",
         TAKEABLE: True,
         DESCWORDS: ['piece', 'paper', 'pieceofpaper']},
 
     'Stone': {
         GROUNDDESC: 'There is a small round stone on the floor',
         SHORTDESC: 'small stone',
-        LONGDESC: 'You can read "0x47 0x4F"',
+        LONGDESC: 'You can read "0x67 0x6F"',
         TAKEABLE: True,
         DESCWORDS: ['stone']
     }
@@ -215,7 +215,7 @@ class TextAdventureCmd(cmd.Cmd):
 
     def do_go(self, arg):
         """You say go"""
-        print('You said "GO" with a mysterious voice')
+        print('You said "go" with a mysterious voice')
         checkForStone()
 
     def do_help(self, arg):
@@ -403,7 +403,7 @@ class TextAdventureCmd(cmd.Cmd):
         # see if the item being looked at is in the inventory
         item = getFirstItemMatchingDesc(lookingAt, inventory)
         if item != None:
-            print('\n'.join(textwrap.wrap(worldItems[item][LONGDESC], SCREEN_WIDTH)))
+            print(worldItems[item][LONGDESC], SCREEN_WIDTH))
             return
 
         print('You do not see that nearby.')
