@@ -41,8 +41,8 @@ worldItems = {
     'Piece of Paper': {
         GROUNDDESC: 'A piece of paper lays on the ground',
         SHORTDESC: 'piece of paper',
-        LONGDESC: 'The piece of paper says: "Solve the first task to prove you are strong enough to enter this'
-                  ' mysterious world!"\n',
+        LONGDESC: "The piece of paper says: \"Solve the first task to prove you are strong enough to enter this"
+                  " mysterious world!\" Type: ascii for more help",
         TAKEABLE: True,
         DESCWORDS: ['piece', 'paper', 'pieceofpaper']},
 
@@ -210,6 +210,26 @@ class TextAdventureCmd(cmd.Cmd):
         print("Take item: take <item>\nDrop item: drop <item>")
         print("Eat item: eat <item>")
         print("Exit game: quit")
+
+    def do_ascii(self, arg):
+        print("   | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |")
+        print("-------------------------------------")
+        print(" 0 |NUL|DLE|SPC| 0 | @ | P | ` | p |")
+        print(" 1 |SOH|DC1| ! | 1 | A | Q | a | q |")
+        print(" 2 |STX|DC2| \" | 2 | B | R | b | r |")
+        print(" 3 |ETX|DC3| # | 3 | C | S | c | s |")
+        print(" 4 |EQT|DC4| $ | 4 | D | T | d | t |")
+        print(" 5 |ENQ|NAK| % | 5 | E | U | e | u |")
+        print(" 6 |ACK|SQN| & | 6 | F | V | f | v |")
+        print(" 7 |BEL|BTB| ' | 7 | G | W | g | w |")
+        print(" 8 |BS |CAN| ( | 8 | H | X | h | x |")
+        print(" 9 |HT |EM | ) | 9 | I | Y | i | y |")
+        print(" A |LF |SUB| * | : | J | Z | j | z |")
+        print(" B |VT |ESC| + | ; | K | [ | k | { |")
+        print(" C |FF |FS | , | < | L | \\ | l | | |")
+        print(" D |CR |GS | - | = | M | ] | m | } |")
+        print(" E |SO |RS | . | > | N | ^ | n | ~ |")
+        print(" F |SI |US | / | ? | O | _ | o |del|")
 
     # Since the code is the exact same, we can just copy the
     # methods with shortened names:
