@@ -41,8 +41,8 @@ worldItems = {
     'Piece of Paper': {
         GROUNDDESC: 'A piece of paper lays on the ground',
         SHORTDESC: 'piece of paper',
-        LONGDESC: "The piece of paper says: \"Solve the first task to prove you are strong enough to enter this"
-                  " mysterious world!\" Type: ascii for more help",
+        LONGDESC: "The piece of paper says: \"Solve the first task to prove you are strong enough to enter Burningham!",
+        EDIBLE: True,
         TAKEABLE: True,
         DESCWORDS: ['piece', 'paper', 'pieceofpaper']},
 
@@ -477,17 +477,11 @@ class TextAdventureCmd(cmd.Cmd):
             return
 
         if itemToEat == 'stone':
-            print('Don\'t try to eat a magical stone, idiot')
+            print('You eat %s' % (itemToEat))
+            print('The magical stone exploded in your mouth...')
             print("GAME OVER")
             time.sleep(2)
             return True
-
-
-        # for item in getAllItemsMatchingDesc(itemToEat, inventory):
-        # if worldItems[item][SHORTDESC] == 'small stone':
-        # print('Don\'t try to eat a magical stone...')
-        # print('GAME OVER')
-        # return True
 
         cantEat = False
 
