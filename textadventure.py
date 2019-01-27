@@ -524,9 +524,8 @@ class TextAdventureCmd(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    print('The ham started burning ...')
+    print('Burningham booted...')
     print('====================\n')
     print('(Type "help" for commands.)\n')
     displayLocation(location)
     TextAdventureCmd().cmdloop()
-    print('Thanks for playing!')
