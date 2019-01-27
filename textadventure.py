@@ -42,7 +42,6 @@ worldItems = {
         GROUNDDESC: 'A piece of paper lays on the ground',
         SHORTDESC: 'piece of paper',
         LONGDESC: "The piece of paper says: \"Solve the first task to prove you are strong enough to enter Burningham!",
-        EDIBLE: True,
         TAKEABLE: True,
         DESCWORDS: ['piece', 'paper', 'pieceofpaper']},
 
