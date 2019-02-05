@@ -41,7 +41,8 @@ worldItems = {
     'Piece of Paper': {
         GROUNDDESC: 'A piece of paper lays on the ground',
         SHORTDESC: 'piece of paper',
-        LONGDESC: "The piece of paper says: \"Solve the first task to prove you are strong enough to enter Burningham!",
+        LONGDESC: "The piece of paper says: \"Solve the first task to prove you are strong enough to enter Burningham!"
+                  "\"",
         TAKEABLE: True,
         DESCWORDS: ['piece', 'paper', 'pieceofpaper']},
 
@@ -50,11 +51,11 @@ worldItems = {
         SHORTDESC: 'small stone',
         LONGDESC: 'You can read "0x67 0x6F"',
         TAKEABLE: True,
-        DESCWORDS: ['stone']
+        DESCWORDS: ['stone'],
     }
 }
 
-location = 'Homebase'  # start in town square
+location = 'Homebase'  # start in homebase
 inventory = []  # start with blank inventory
 showFullExits = True
 
@@ -142,11 +143,12 @@ def checkForStone():
 
 
 def enterBurningham():
+    time.sleep(2)
     for i in range(0, 20):
         print("***\n")
         print("white flashlight")
         time.sleep(0.1)
-    print("\n\n Wubba lubba dub dub ! \n")
+    print("Wubba lubba dub dub ! \n")
     global location
     location = 'Central Plaza'
     displayLocation(location)
