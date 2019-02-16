@@ -17,6 +17,7 @@ GROUNDDESC = 'grounddesc'
 SHORTDESC = 'shortdesc'
 LONGDESC = 'longdesc'
 TAKEABLE = 'takeable'
+TALKABLE = 'talkable'
 EDIBLE = 'edible'
 DESCWORDS = 'descwords'
 
@@ -31,19 +32,20 @@ worldRooms = {
     'Backyard': {
         DESC: 'It\'s really dirty here!',
         SOUTH: 'Homebase',
-        GROUND: ['Piece of Paper', 'Stone']},
+        GROUND: ['Piece of Paper', 'Stone', 'TestPerson']},
     'Central Plaza': {
         DESC: 'This is the wonderful Central Plaza of Burningham (German: "brennender Schinken")',
         GROUND: []},
 }
 
-worldItems = {
+worldItems = { #and persons
     'Piece of Paper': {
         GROUNDDESC: 'A piece of paper lays on the ground',
         SHORTDESC: 'piece of paper',
         LONGDESC: "The piece of paper says: \"Solve the first task to prove you are strong enough to enter Burningham!"
                   "\"",
         TAKEABLE: True,
+        TALKABLE: False,
         DESCWORDS: ['piece', 'paper', 'pieceofpaper']},
 
     'Stone': {
@@ -51,8 +53,18 @@ worldItems = {
         SHORTDESC: 'small stone',
         LONGDESC: 'You can read "0x67 0x6F"',
         TAKEABLE: True,
+        TALKABLE: False,
         DESCWORDS: ['stone'],
-    }
+    },
+
+    'TestPerson': {
+        GROUNDDESC: 'Testperson standing around',
+        SHORTDESC: 'test person',
+        LONGDESC: 'H E L L O,   M Y   N A M E    IS   ...   N O T H I N G   ...    C R A P',
+        TAKEABLE: False,
+        TALKABLE: True,
+        DESCWORDS: ['testperson', 'test person', 'TestPerson'],
+    },
 }
 
 location = 'Homebase'  # start in homebase
@@ -298,9 +310,31 @@ class TextAdventureCmd(cmd.Cmd):
             return
 
         if cantTake:
-            print('You cannot take "%s".' % (itemToTake))
+            print('You cannot take "%s".' % itemToTake)
         else:
             print('That is not on the ground.')
+
+    def do_talk(self, arg):
+        itemToTalk = arg.lower()
+
+        if itemToTalk == '':
+            print('To whom? Type "look" to see everything around you!')
+            return
+
+        cantTalk = False
+
+        for item in getAllItemsMatchingDesc(itemToTalk, worldRooms[location][GROUND]):
+            if worldItems[item].get(TALKABLE, True) == False:
+                cantTalk = True
+                continue  # there may be other items named this that you can look at, so we continue checking
+            print('You talk to %s.' % (worldItems[item][SHORTDESC]))
+            print('Saying: %s' % (worldItems[item][LONGDESC]))
+            return
+
+        if cantTalk:
+            print('You cannot talk to "%s".' % itemToTalk)
+        else:
+            print('This person isn\'t near you')
 
     def do_drop(self, arg):
         """"drop <item> - Drop an item from your inventory onto the ground."""
@@ -335,6 +369,22 @@ class TextAdventureCmd(cmd.Cmd):
         for item in list(set(worldRooms[location][GROUND])):
             for descWord in worldItems[item][DESCWORDS]:
                 if descWord.startswith(text) and worldItems[item].get(TAKEABLE, True):
+                    possibleItems.append(descWord)
+
+        return list(set(possibleItems))  # make list unique
+
+    def complete_talk(self, text, state):
+        possibleItems = []
+        text = text.lower()
+
+        # if the user has only typed "take" but no item name:
+        if not text:
+            return getAllFirstDescWords(worldRooms[location][GROUND])
+
+        # otherwise, get a list of all "description words" for ground items matching the command text so far:
+        for item in list(set(worldRooms[location][GROUND])):
+            for descWord in worldItems[item][DESCWORDS]:
+                if descWord.startswith(text) and worldItems[item].get(TALKABLE, True):
                     possibleItems.append(descWord)
 
         return list(set(possibleItems))  # make list unique
