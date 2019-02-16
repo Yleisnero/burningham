@@ -32,10 +32,14 @@ worldRooms = {
     'Backyard': {
         DESC: 'It\'s really dirty here!',
         SOUTH: 'Homebase',
-        GROUND: ['Piece of Paper', 'Stone', 'TestPerson']},
+        GROUND: ['Piece of Paper', 'Stone', 'Pelto Pekka']},
     'Central Plaza': {
         DESC: 'This is the wonderful Central Plaza of Burningham (German: "brennender Schinken")',
+        EAST: 'Townhall',
         GROUND: []},
+    'Townhall': {
+        DESC: 'You know what, Burningham got a townhall',
+        GROUND: ['Greyham']},
 }
 
 worldItems = { #and persons
@@ -57,13 +61,24 @@ worldItems = { #and persons
         DESCWORDS: ['stone'],
     },
 
-    'TestPerson': {
-        GROUNDDESC: 'Testperson standing around',
-        SHORTDESC: 'test person',
-        LONGDESC: 'H E L L O,   M Y   N A M E    IS   ...   N O T H I N G   ...    C R A P',
+    'Pelto Pekka': {
+        GROUNDDESC: 'Pelto Pekka alway hangs around in your backyard, nobody knows why',
+        SHORTDESC: 'pelto pekka',
+        LONGDESC: 'Hello friend! If I were you I would ask myself for advice and than I would tell you that if I where '
+                  'you I would always say what I think!',
         TAKEABLE: False,
         TALKABLE: True,
-        DESCWORDS: ['testperson', 'test person', 'TestPerson'],
+        DESCWORDS: ['pelto', 'pekka', 'pelto pekka'],
+    },
+
+    'Greyham': {
+        GROUNDDESC: 'Greyham is the mayor of Burningham and he is always in the townhall',
+        SHORTDESC: 'greyham',
+        LONGDESC: 'Welcome to Burningham newcomer! I hope you feel comfortable in our city and always remember to take'
+                  'a bowl of tuna salad with you!',
+        TAKEABLE: False,
+        TALKABLE: True,
+        DESCWORDS: ['greyham', 'grey'],
     },
 }
 
@@ -328,7 +343,7 @@ class TextAdventureCmd(cmd.Cmd):
                 cantTalk = True
                 continue  # there may be other items named this that you can look at, so we continue checking
             print('You talk to %s.' % (worldItems[item][SHORTDESC]))
-            print('Saying: %s' % (worldItems[item][LONGDESC]))
+            print('%s' % (worldItems[item][LONGDESC]))
             return
 
         if cantTalk:
