@@ -316,7 +316,7 @@ class TextAdventureCmd(cmd.Cmd):
 
         # get the item name that the player's command describes
         for item in getAllItemsMatchingDesc(itemToTake, worldRooms[location][GROUND]):
-            if worldItems[item].get(TAKEABLE, True) == False:
+            if not worldItems[item].get(TAKEABLE):
                 cantTake = True
                 continue  # there may be other items named this that you can take, so we continue checking
             print('You take %s.' % (worldItems[item][SHORTDESC]))
@@ -339,7 +339,7 @@ class TextAdventureCmd(cmd.Cmd):
         cantTalk = False
 
         for item in getAllItemsMatchingDesc(itemToTalk, worldRooms[location][GROUND]):
-            if worldItems[item].get(TALKABLE, True) == False:
+            if not worldItems[item].get(TALKABLE):
                 cantTalk = True
                 continue  # there may be other items named this that you can look at, so we continue checking
             print('You talk to %s.' % (worldItems[item][SHORTDESC]))
